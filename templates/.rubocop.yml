@@ -1,0 +1,14 @@
+#require: 'rubocop-rspec'
+
+inherit_gem:
+  ryu39cop:
+    - 'config/rubocop.yml'
+    #- 'config/rails.yml'
+    #- 'config/rspec.yml'
+
+#inherit_from:
+#  - .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.4
+  #TargetRailsVersion: 5.0

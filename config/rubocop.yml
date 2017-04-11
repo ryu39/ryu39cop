@@ -1,0 +1,267 @@
+AllCops:
+  Exclude:
+    - 'bin/bundle'
+    - 'bin/rails'
+    - 'bin/rake'
+    - 'bin/setup'
+    - 'bin/spring'
+    - 'bin/update'
+    - 'config.ru'
+    - 'vendor/**/*'
+    - 'db/schema.rb'
+    - 'node_modules/**/*'
+  DisplayCopNames: true
+
+## Layout cops
+#  https://rubocop.readthedocs.io/en/latest/cops_layout/
+
+# 自動生成ファイルは除外
+Layout/ExtraSpacing:
+  Exclude:
+    - 'db/migrate/*.rb'
+
+# 設定が面倒。各自に任せる。
+Layout/IndentHeredoc:
+  Enabled: false
+
+# 状況に応じて使い分けてよい
+Layout/MultilineAssignmentLayout:
+  Enabled: false
+
+# このスタイルが好きなため。
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
+## Lint cops
+#  https://rubocop.readthedocs.io/en/latest/cops_lint/
+
+# expect { subject }.to change { Hoge.count }.by(1) がoffenseと見なされてしまうため。
+# これは公式ドキュメントで示されている書き方なので、例外としたい。
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*.rb'
+
+# 下記のSafe Assignmentもやはり == と誤解を発生させる可能性があるため禁止する。
+# if (val = do_something)
+#   puts val
+# end
+Lint/AssignmentInCondition:
+  AllowSafeAssignment: false
+
+# 何もしないというwhen節が定義できた方が、表現の幅が広がるはず。
+# case val
+# when 0
+#   # nothing to do
+# when 1
+#   do_something
+# else
+#   raise 'unexpected'
+# end
+Lint/EmptyWhen:
+  Enabled: false
+
+# StandardErrorが自然
+Lint/InheritException:
+  EnforcedStyle: standard_error
+
+# キーワード引数の先頭に「_」をつけてしまうと、呼び出し側で「_」をつけて呼ばないとキーが存在せずエラーになってしまうため。
+Lint/UnusedMethodArgument:
+  AllowUnusedKeywordArguments: true
+
+## Metrics
+#  https://rubocop.readthedocs.io/en/latest/cops_metrics/
+
+Metrics/AbcSize:
+  Max: 20
+
+# 巨大Blockが前提のファイルは除外。
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - 'Gemfile'
+    - 'Guardfile'
+    - 'config/application.rb'
+    - 'config/environments/*.rb'
+    - 'config/routes.rb'
+    - 'config/routes/**/*.rb'
+    - 'db/schema.rb'
+    - '*.gemspec'
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+# 多くのRubyコーディング規約では「80」か「100」が主流な値であった。
+# 「80」だと厳しすぎるので、「100」に設定する。
+# 自動生成ファイルは除外
+Metrics/LineLength:
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - 'db/migrate/*.rb'
+
+# キーワード引数は複雑さをほとんどあげないと思っているので、除外。
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+
+Metrics/PerceivedComplexity:
+  Max: 8
+
+## Performance
+#  https://rubocop.readthedocs.io/en/latest/cops_performance/
+
+# nothing to customize
+
+## Security
+#  https://rubocop.readthedocs.io/en/latest/cops_security/
+
+Security/YAMLLoad:
+  Enabled: false
+
+## Style
+#  https://rubocop.readthedocs.io/en/latest/cops_style/
+
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+
+# redirect_to xxx and return を使いたい
+Style/AndOr:
+  EnforcedStyle: conditionals
+
+Style/AsciiComments:
+  Enabled: false
+
+# specのletは {} で統一した方が見やすいため除外。
+Style/BlockDelimiters:
+  AutoCorrect: false
+  Exclude:
+    - 'spec/**/*'
+
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+# class A::Bと書いてインデントを減らして定義した方が読みやすいケースも結構ある。
+# 特にauto_loadingが効くRailsでは、使ってもよいはず。
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: true
+
+Style/CollectionMethods:
+  PreferredMethods:
+    detect: 'detect'
+    find: 'detect'
+    inject: 'inject'
+    reduce: 'inject'
+
+Style/ConstantName:
+  Enabled: true
+
+# めんどくさい
+Style/Documentation:
+  Enabled: false
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/For:
+  Enabled: true
+
+Style/GuardClause:
+  MinBodyLength: 5
+
+Style/HashSyntax:
+  Exclude:
+    - '**/*.rake'
+    - 'Rakefile'
+
+# 2つの条件の意味合いの違いで、どちらも使いたいケースがあると思う。
+Style/IfInsideElse:
+  Enabled: false
+
+# 後置if/unlessが合わないケースもある。
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/IfUnlessModifierOfIfUnless:
+  Enabled: true
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+
+# RSpec の matcher を誤検知するため
+#   expect(array).to include('a', 'b')
+Style/MixinGrouping:
+  Exclude:
+    - 'spec/**/*'
+
+Style/NumericLiterals:
+  MinDigits: 7
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: ()
+    '%w': '()'
+    '%W': '()'
+    '%i': '()'
+    '%I': '()'
+    '%r': '{}'
+
+Style/PerlBackrefs:
+  AutoCorrect: false
+
+Style/PredicateName:
+  NamePrefixBlacklist:
+    - 'is_'
+    - 'have_'
+  NamePrefix:
+    - 'is_'
+    - 'have_'
+
+Style/PreferredHashMethods:
+  EnforcedStyle: verbose
+
+Style/RedundantReturn:
+  AllowMultipleReturnValues: true
+
+Style/RedundantSelf:
+  Enabled: false
+
+Style/SafeNavigation:
+  Enabled: false
+
+Style/Semicolon:
+  Exclude:
+    - "spec/**/*"
+
+Style/StringMethods:
+  Enabled: true
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/TernaryParentheses:
+  EnforcedStyle: require_parentheses_when_complex
+
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/WordArray:
+  Enabled: false
+
+Style/ZeroLengthPredicate:
+  Enabled: false
+
+# 機能的に近いものをまとめる方が、必要Gem一覧を見たときにわかりやすいと思うため。
+Bundler/OrderedGems:
+  Enabled: false

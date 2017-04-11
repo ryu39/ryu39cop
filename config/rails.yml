@@ -1,0 +1,8 @@
+Rails:
+  Enabled: true
+
+Rails/NotNullColumn:
+  Enabled: false
+
+Rails/SaveBang:
+  Enabled: true

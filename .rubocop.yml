@@ -1,0 +1,4 @@
+inherit_from: 'config/rubocop.yml'
+
+AllCops:
+  TargetRubyVersion: 2.1
