@@ -110,6 +110,18 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Max: 8
 
+## Naming
+Naming/ConstantName:
+  Enabled: true
+
+Naming/PredicateName:
+  NamePrefixBlacklist:
+    - 'is_'
+    - 'have_'
+  NamePrefix:
+    - 'is_'
+    - 'have_'
+
 ## Performance
 #  https://rubocop.readthedocs.io/en/latest/cops_performance/
 
@@ -157,9 +169,6 @@ Style/CollectionMethods:
     find: 'detect'
     inject: 'inject'
     reduce: 'inject'
-
-Style/ConstantName:
-  Enabled: true
 
 # めんどくさい
 Style/Documentation:
@@ -220,14 +229,6 @@ Style/PercentLiteralDelimiters:
 Style/PerlBackrefs:
   AutoCorrect: false
 
-Style/PredicateName:
-  NamePrefixBlacklist:
-    - 'is_'
-    - 'have_'
-  NamePrefix:
-    - 'is_'
-    - 'have_'
-
 Style/PreferredHashMethods:
   EnforcedStyle: verbose
 
@@ -253,8 +254,11 @@ Style/SymbolArray:
 Style/TernaryParentheses:
   EnforcedStyle: require_parentheses_when_complex
 
-Style/TrailingCommaInLiteral:
-  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
 
 Style/WordArray:
   Enabled: false
