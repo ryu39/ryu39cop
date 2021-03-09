@@ -21,7 +21,7 @@ Layout/ExtraSpacing:
     - 'db/migrate/*.rb'
 
 # 設定が面倒。各自に任せる。
-Layout/IndentHeredoc:
+Layout/HeredocIndentation:
   Enabled: false
 
 # 状況に応じて使い分けてよい
@@ -95,7 +95,7 @@ Metrics/CyclomaticComplexity:
 # 多くのRubyコーディング規約では「80」か「100」が主流な値であった。
 # 「80」だと厳しすぎるので、「100」に設定する。
 # 自動生成ファイルは除外
-Metrics/LineLength:
+Layout/LineLength:
   Max: 100
 
 Metrics/MethodLength:
@@ -115,7 +115,7 @@ Naming/ConstantName:
   Enabled: true
 
 Naming/PredicateName:
-  NamePrefixBlacklist:
+  ForbiddenPrefixes:
     - 'is_'
     - 'have_'
   NamePrefix:
@@ -151,9 +151,6 @@ Style/BlockDelimiters:
   AutoCorrect: false
   Exclude:
     - 'spec/**/*'
-
-Style/BracesAroundHashParameters:
-  Enabled: false
 
 # class A::Bと書いてインデントを減らして定義した方が読みやすいケースも結構ある。
 # 特にauto_loadingが効くRailsでは、使ってもよいはず。
